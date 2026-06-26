@@ -5,6 +5,12 @@
   <a href="https://www.linkedin.com/in/muhammad-ahad-imran/"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"/></a>
   <a href="mailto:muhammadahad350@gmail.com"><img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email"/></a>
   <a href="https://github.com/Ahad690"><img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"/></a>
+  <a href="https://huggingface.co/Ahad690"><img src="https://img.shields.io/badge/Hugging%20Face-FFD21E?style=for-the-badge&logo=huggingface&logoColor=black" alt="Hugging Face"/></a>
+  <a href="https://www.kaggle.com/mahad69"><img src="https://img.shields.io/badge/Kaggle-20BEFF?style=for-the-badge&logo=kaggle&logoColor=white" alt="Kaggle"/></a>
+</p>
+
+<p align="center">
+  <img src="https://komarev.com/ghpvc/?username=Ahad690&label=Profile%20views&color=0e75b6&style=flat-square" alt="Profile views"/>
 </p>
 
 ---
@@ -22,14 +28,15 @@
 ### 🛠️ Languages &amp; Tools
 
 <p align="center">
-  <img src="https://skillicons.dev/icons?i=python,ts,js,cpp,html,css,powershell&perline=7" alt="languages"/>
+  <img src="https://skillicons.dev/icons?i=python,ts,js,cpp,html,css,powershell,bash&perline=8" alt="languages"/>
   <br/>
-  <img src="https://skillicons.dev/icons?i=pytorch,sklearn,fastapi,nodejs,express,postgres,sqlite&perline=7" alt="ai-and-backend"/>
+  <img src="https://skillicons.dev/icons?i=pytorch,sklearn,opencv,fastapi,nodejs,express,postgres,sqlite&perline=8" alt="ai-and-backend"/>
   <br/>
-  <img src="https://skillicons.dev/icons?i=supabase,neo4j,docker,nginx,githubactions,gcp,firebase&perline=7" alt="infra"/>
+  <img src="https://skillicons.dev/icons?i=supabase,neo4j,docker,nginx,githubactions,gcp,firebase,cloudflare&perline=8" alt="infra"/>
   <br/>
-  <img src="https://skillicons.dev/icons?i=react,vite,tailwind,git,github&perline=7" alt="frontend-and-tools"/>
-  &nbsp;<img src="https://img.shields.io/badge/Jupyter-F37626?logo=jupyter&logoColor=white&style=flat" alt="Jupyter" height="28"/>
+  <img src="https://skillicons.dev/icons?i=react,vite,tailwind,threejs,linux,git,github,vscode&perline=8" alt="frontend-and-tools"/>
+  <br/>
+  <img src="https://img.shields.io/badge/Jupyter-F37626?logo=jupyter&logoColor=white&style=flat" alt="Jupyter" height="28"/>
 </p>
 
 ---
