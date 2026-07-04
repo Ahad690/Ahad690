@@ -13,6 +13,10 @@
   <img src="https://komarev.com/ghpvc/?username=Ahad690&label=Profile%20views&color=0e75b6&style=flat-square" alt="Profile views"/>
 </p>
 
+<p align="center">
+  <img src="terminal.svg" alt="terminal intro — whoami: ahad, AI &amp; full-stack engineer" width="800"/>
+</p>
+
 ---
 
 ### 🚀 Currently building / interested in
