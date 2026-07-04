@@ -1,0 +1,74 @@
+# Renders the GitHub-stats + top-languages cards DAILY with github-readme-stats'
+# own renderer (run right here in CI with the built-in GITHUB_TOKEN) and commits
+# them to the `stats-output` branch. The README embeds those committed SVGs, so
+# it never depends on the chronically rate-limited / paused public Vercel
+# instance. No PAT or external service needed (public-repo stats only).
+name: Generate Stats Cards
+
+on:
+  schedule:
+    - cron: "0 3 * * *" # daily, 03:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  stats:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Fetch github-readme-stats renderer
+        run: |
+          git clone --depth 1 https://github.com/anuraghazra/github-readme-stats.git grs
+          cd grs && npm ci --omit=dev --ignore-scripts
+
+      - name: Render cards
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cat > render.mjs <<'EOF'
+          import { writeFileSync, mkdirSync } from "node:fs";
+          process.env.PAT_1 = process.env.GH_TOKEN;
+          mkdirSync("out", { recursive: true });
+          const res = (file) => ({
+            setHeader() {},
+            send(body) { writeFileSync(file, body); },
+          });
+          const statsApi = (await import("./grs/api/index.js")).default;
+          await statsApi({ query: {
+            username: "Ahad690", show_icons: "true", include_all_commits: "true",
+            hide_border: "true", theme: "tokyonight",
+          } }, res("out/stats.svg"));
+          const langsApi = (await import("./grs/api/top-langs.js")).default;
+          await langsApi({ query: {
+            username: "Ahad690", layout: "compact", langs_count: "8",
+            hide_border: "true", theme: "tokyonight",
+          } }, res("out/top-langs.svg"));
+          EOF
+          node render.mjs
+          # A failed API fetch still renders an SVG — an error card. Fail the
+          # run instead of overwriting yesterday's good cards with it.
+          if grep -q "Something went wrong" out/*.svg; then
+            echo "Renderer produced an error card — keeping previous cards."
+            grep -o "Something went wrong[^<]*" out/*.svg || true
+            exit 1
+          fi
+          ls -la out
+
+      - name: Publish to stats-output branch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cd out
+          git init -b stats-output
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "chore: refresh stats cards"
+          git push -f "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git" stats-output

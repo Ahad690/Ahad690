@@ -47,9 +47,12 @@
 
 ### 📊 GitHub Stats
 
+<!-- Cards are rendered daily by .github/workflows/stats-cards.yml into the
+     stats-output branch (self-hosted render — the public github-readme-stats
+     Vercel instance is chronically rate-limited/paused). -->
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=Ahad690&show_icons=true&include_all_commits=true&count_private=true&hide_border=true&theme=tokyonight" alt="Ahad690 stats" height="165"/>
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Ahad690&layout=compact&langs_count=8&hide_border=true&theme=tokyonight" alt="Top languages" height="165"/>
+  <img src="https://raw.githubusercontent.com/Ahad690/Ahad690/stats-output/stats.svg" alt="Ahad690 stats" height="165"/>
+  <img src="https://raw.githubusercontent.com/Ahad690/Ahad690/stats-output/top-langs.svg" alt="Top languages" height="165"/>
 </p>
 
 <p align="center">
