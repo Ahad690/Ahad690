@@ -54,6 +54,14 @@ jobs:
           import { writeFileSync, mkdirSync } from "node:fs";
           process.env.PAT_1 = process.env.GH_TOKEN;
           mkdirSync("out", { recursive: true });
+          // diagnostic: how many owned repos can this token list? (24 = private
+          // included, ~12 = public-only). Count only — nothing sensitive logged.
+          const diag = await fetch("https://api.github.com/graphql", {
+            method: "POST",
+            headers: { Authorization: `bearer ${process.env.GH_TOKEN}` },
+            body: JSON.stringify({ query: `query { user(login:"Ahad690") { repositories(ownerAffiliations: OWNER, isFork: false, first: 100) { totalCount } } }` }),
+          }).then((r) => r.json());
+          console.log("repos visible to token:", JSON.stringify(diag.data?.user?.repositories ?? diag.errors));
           const res = (file) => ({
             setHeader() {},
             send(body) { writeFileSync(file, body); },
