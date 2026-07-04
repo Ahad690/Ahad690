@@ -23,15 +23,24 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Fetch github-readme-stats renderer
+      - name: Fetch github-readme-stats renderer (pinned)
+        # Pinned to a reviewed commit SHA: upstream changes (or a compromised
+        # upstream — the project is deprecated) can never reach the token in
+        # this job without an explicit pin bump here. npm ci installs the exact
+        # lockfile of that commit; --ignore-scripts blocks install-time hooks.
         run: |
-          git clone --depth 1 https://github.com/anuraghazra/github-readme-stats.git grs
-          cd grs && npm ci --omit=dev --ignore-scripts
+          git init grs && cd grs
+          git remote add origin https://github.com/anuraghazra/github-readme-stats.git
+          git fetch --depth 1 origin 54a7985aeefda00d5eadb55b80c17c7f976c37d2
+          git checkout FETCH_HEAD
+          npm ci --omit=dev --ignore-scripts
 
       - name: Render cards
         env:
-          # METRICS_TOKEN = optional no-scope PAT: lets count_private include
-          # your private contribution count. Falls back to the built-in token.
+          # METRICS_TOKEN = fine-grained PAT, All repositories, Contents:
+          # Read-only (+ Metadata) — genuinely read-only, so a leak can't
+          # write anywhere. Enables private contribution count + private-repo
+          # languages/stars. Falls back to the built-in token (public-only).
           GH_TOKEN: ${{ secrets.METRICS_TOKEN || secrets.GITHUB_TOKEN }}
         run: |
           cat > render.mjs <<'EOF'
