@@ -53,7 +53,11 @@ jobs:
           });
           const statsApi = (await import("./grs/api/index.js")).default;
           await statsApi({ query: {
-            username: "Ahad690", show_icons: "true", include_all_commits: "true",
+            // include_all_commits uses the commit-SEARCH API, which ignores
+            // fine-grained-PAT private grants (all-time count came out
+            // public-only: 225 vs the real ~1.6k). Year-scoped GraphQL commits
+            // DO include private with this token — bigger and more honest.
+            username: "Ahad690", show_icons: "true",
             count_private: "true", hide_border: "true", theme: "tokyonight",
           } }, res("out/stats.svg"));
           const langsApi = (await import("./grs/api/top-langs.js")).default;
