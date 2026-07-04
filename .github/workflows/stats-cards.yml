@@ -30,7 +30,9 @@ jobs:
 
       - name: Render cards
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # METRICS_TOKEN = optional no-scope PAT: lets count_private include
+          # your private contribution count. Falls back to the built-in token.
+          GH_TOKEN: ${{ secrets.METRICS_TOKEN || secrets.GITHUB_TOKEN }}
         run: |
           cat > render.mjs <<'EOF'
           import { writeFileSync, mkdirSync } from "node:fs";
@@ -43,7 +45,7 @@ jobs:
           const statsApi = (await import("./grs/api/index.js")).default;
           await statsApi({ query: {
             username: "Ahad690", show_icons: "true", include_all_commits: "true",
-            hide_border: "true", theme: "tokyonight",
+            count_private: "true", hide_border: "true", theme: "tokyonight",
           } }, res("out/stats.svg"));
           const langsApi = (await import("./grs/api/top-langs.js")).default;
           await langsApi({ query: {
