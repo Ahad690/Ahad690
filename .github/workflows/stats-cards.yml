@@ -34,6 +34,13 @@ jobs:
           git fetch --depth 1 origin 54a7985aeefda00d5eadb55b80c17c7f976c37d2
           git checkout FETCH_HEAD
           npm ci --omit=dev --ignore-scripts
+          # Count private contributions into Total Commits (upstream removed
+          # count_private; GraphQL reports own private work only via
+          # restrictedContributionsCount). Safe: renderer is pinned above.
+          sed -i 's/totalCommitContributions,/totalCommitContributions, restrictedContributionsCount,/' src/fetchers/stats.js
+          sed -i 's/stats.totalCommits = user.commits.totalCommitContributions;/stats.totalCommits = user.commits.totalCommitContributions + (user.commits.restrictedContributionsCount || 0);/' src/fetchers/stats.js
+          # both seds must have landed — fail loudly if the pin ever changes
+          test "$(grep -c restrictedContributionsCount src/fetchers/stats.js)" = "2"
 
       - name: Render cards
         env:
@@ -53,12 +60,12 @@ jobs:
           });
           const statsApi = (await import("./grs/api/index.js")).default;
           await statsApi({ query: {
-            // include_all_commits uses the commit-SEARCH API, which ignores
-            // fine-grained-PAT private grants (all-time count came out
-            // public-only: 225 vs the real ~1.6k). Year-scoped GraphQL commits
-            // DO include private with this token — bigger and more honest.
+            // No include_all_commits: that path uses the commit-SEARCH API,
+            // which ignores fine-grained-PAT private grants (came out 225,
+            // public-only). Year-scoped GraphQL + the restrictedContributions
+            // patch above shows the real total incl. private (~1.3k).
             username: "Ahad690", show_icons: "true",
-            count_private: "true", hide_border: "true", theme: "tokyonight",
+            hide_border: "true", theme: "tokyonight",
           } }, res("out/stats.svg"));
           const langsApi = (await import("./grs/api/top-langs.js")).default;
           await langsApi({ query: {
