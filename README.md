@@ -23,6 +23,7 @@
 
 - 🧩 **[Penora](https://penora.us)** — an agentic AI study workspace: multi-LLM tool-calling, document/slide generation, sandboxed code + charts, and Google Classroom sync.
 - 📈 **[LeadGenPro](https://leadgenpro.tech)** — an AI B2B lead-generation SaaS: LinkedIn scraping → multi-provider AI enrichment, lead scoring, and credit-metered billing.
+- 📊 **[Catalyst](https://catalyst.catalyst-bot.workers.dev)** — a news-driven crypto trading bot: DeepSeek LLM headline scoring, momentum + ADX stack, and a deterministic risk engine (ATR stops, portfolio-heat caps, drawdown kill-switch) — paper-mode-first with honest fee modeling.
 - 🧠 Deep learning research — recurrent-attention computer vision and audio/speech ML in **PyTorch**.
 - 🔌 Agentic **tool-calling**, **RAG**, and multi-provider / self-hosted **LLM** stacks.
 - 🎓 Pursuing a **BS in Artificial Intelligence** @ NUTECH University (expected 2027).
@@ -75,6 +76,7 @@
 |---|---|
 | **[Penora](https://penora.us)** · live | Agentic AI study workspace — multi-LLM tool-calling, doc/slide generation, sandboxed Python + charts, Google Classroom sync, credit billing, blue-green Docker deploys. |
 | **[LeadGenPro](https://leadgenpro.tech)** · live | AI B2B lead-gen SaaS — Apify LinkedIn scraping → hybrid multi-provider AI enrichment, A–F lead scoring, agentic chatbot, async FastAPI. |
+| **[Catalyst](https://catalyst.catalyst-bot.workers.dev)** · live | News-driven crypto trading bot — LLM (DeepSeek) headline scoring + technical momentum with an ADX regime gate, deterministic risk engine (fixed-fractional sizing, ATR-scaled 2:1 brackets, portfolio-heat + max-drawdown halts), fee-modeled paper trading, full Postgres audit trail, React dashboard. FastAPI · ccxt · Supabase · Cloudflare. |
 | **[DR-RAM](https://github.com/Ahad690/DR-RAM-Diabetic-Retinopathy-Detection)** | Recurrent visual-attention + CNN for diabetic retinopathy — **82.1% acc / 0.891 QWK** on APTOS-2019. |
 | **[speech-emotion-recognition-ensemble](https://github.com/Ahad690/speech-emotion-recognition-ensemble)** | CNN + BiLSTM + Transformer ensemble classifying 7 emotions across RAVDESS / TESS / CREMA-D. |
 | **[CiteGraph-NLP](https://github.com/Ahad690/CiteGraph-NLP)** | Confidence-aware citation-lineage knowledge graph that ranks probable foundational papers. |
